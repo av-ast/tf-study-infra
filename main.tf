@@ -33,7 +33,7 @@ provider "aws" {
 provider "ct" {}
 
 provider "docker" {
-  host = "ssh://${local.instance_user}@${aws_instance.app_server.public_ip}:22"
+  host = "ssh://${local.instance_user}@${aws_eip.eip.public_ip}:22"
 }
 
 data "aws_vpc" "default" {
@@ -82,11 +82,24 @@ resource "docker_image" "app" {
 resource "docker_container" "app" {
   image = docker_image.app.latest
   name  = "app"
+
+  restart = "unless-stopped"
+
   env = [
     "PORT=4000",
   ]
+
   ports {
     internal = 4000
     external = 80
   }
+}
+
+resource "aws_eip" "eip" {
+  vpc = true
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.app_server.id
+  allocation_id = aws_eip.eip.id
 }
