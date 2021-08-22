@@ -1,3 +1,7 @@
+variable "project" {}
+
+variable "environment" {}
+
 variable "region" {
   description = "AWS region"
   type        = string
@@ -18,3 +22,5 @@ variable "private_subnets" {
 variable "availability_zones" {
   description = "List of availability zones"
 }
+
+variable "container_port" {}
