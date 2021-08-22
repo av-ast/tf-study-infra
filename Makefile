@@ -8,3 +8,7 @@ push_vars:
 
 pull_vars:
 	aws s3 cp --sse="AES256" $(REMOTE_TFVARS_PATH) $(LOCAL_TFVARS_PATH)
+
+format:
+	terragrunt fmt -recursive
+
