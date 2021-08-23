@@ -39,6 +39,14 @@ module "task_definition" {
           hostPort      = var.container_port
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group = module.logs.name
+          awslogs-region = var.region
+          awslogs-stream-prefix = local.app_name
+        }
+      }
     }
   ])
 }
@@ -69,4 +77,10 @@ module "service" {
   aws_alb_target_group_arn    = module.alb.tg_arn
   container_port              = var.container_port
   container_name              = local.app_name
+}
+
+module "logs" {
+  source                      = "../cloudwatch"
+  environment                 = var.environment
+  name                        = var.name
 }

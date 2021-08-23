@@ -1,3 +1,4 @@
+variable "region" {}
 variable "name" {}
 variable "environment" {}
 variable "container_port" {}

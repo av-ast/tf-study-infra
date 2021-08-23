@@ -15,6 +15,7 @@ module "security_groups" {
 
 module "app" {
   source          = "./modules/app"
+  region          = var.region
   name            = var.project
   environment     = var.environment
   task_cpu        = var.task_cpu
