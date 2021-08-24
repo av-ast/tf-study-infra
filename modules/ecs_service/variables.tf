@@ -12,3 +12,4 @@ variable "subnets" {}
 variable "aws_alb_target_group_arn" {}
 variable "container_port" {}
 variable "container_name" {}
+variable "enable_execute_command" {}
