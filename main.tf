@@ -21,6 +21,7 @@ module "security_groups" {
 
 module "app" {
   source          = "./modules/app"
+  domain          = var.domain
   region          = var.region
   name            = var.project
   environment     = var.environment

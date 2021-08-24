@@ -2,6 +2,11 @@ locals {
   app_name = "web"
 }
 
+data "aws_acm_certificate" "cert" {
+  domain   = var.domain
+  statuses = ["ISSUED"]
+}
+
 module "variables" {
   source = "../variables"
   map    = var.variables
@@ -79,6 +84,7 @@ module "alb" {
   subnets           = var.public_subnets
   vpc_id            = var.vpc_id
   health_check_path = "/health_check"
+  certificate_arn   = data.aws_acm_certificate.cert.arn
 }
 
 module "service" {
@@ -127,4 +133,12 @@ module "dashboard" {
   alb_arn          = module.alb.alb_arn_suffix
   cluster_name     = module.cluster.name
   service_name     = module.service.name
+}
+
+module "dns" {
+  source       = "../dns"
+  domain       = var.domain
+  alb_dns_name = module.alb.alb_dns_name
+  alb_zone_id  = module.alb.alb_zone_id
+  environment  = var.environment
 }

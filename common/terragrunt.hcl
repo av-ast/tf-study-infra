@@ -1,11 +1,13 @@
 locals {
-  region = "us-east-1"
+  region  = "us-east-1"
   project = "study-infra"
+  domain  = "infra.av-ast.me"
 }
 
 inputs = {
-  region = local.region
+  region  = local.region
   project = local.project
+  domain  = local.domain
 }
 
 remote_state {

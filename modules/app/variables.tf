@@ -12,3 +12,4 @@ variable "alb_sg" {}
 variable "ecs_sg" {}
 variable "secrets" {}
 variable "variables" {}
+variable "domain" {}

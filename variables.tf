@@ -28,3 +28,4 @@ variable "image" {}
 variable "task_cpu" {}
 variable "task_memory" {}
 variable "secrets" {}
+variable "domain" {}
