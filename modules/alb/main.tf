@@ -14,11 +14,11 @@ resource "aws_lb" "main" {
 }
 
 resource "aws_alb_target_group" "main" {
-  name        = "${var.name}-tg-${var.environment}"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = var.vpc_id
-  target_type = "ip"
+  name                 = "${var.name}-tg-${var.environment}"
+  port                 = 80
+  protocol             = "HTTP"
+  vpc_id               = var.vpc_id
+  target_type          = "ip"
   deregistration_delay = 10
 
   health_check {

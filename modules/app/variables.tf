@@ -10,3 +10,5 @@ variable "public_subnets" {}
 variable "private_subnets" {}
 variable "alb_sg" {}
 variable "ecs_sg" {}
+variable "secrets" {}
+variable "variables" {}
